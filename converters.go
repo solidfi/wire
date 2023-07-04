@@ -69,6 +69,18 @@ func (c *converters) formatAlphaField(s string, max uint, options FormatOptions)
 }
 
 func (c *converters) parseVariableStringField(r string, maxLen int) (got string, size int, err error) {
+	increaseSize := false
+	if len(r) > 1 && r[0:1] == "*" {
+		r = r[1:]
+		increaseSize = true
+	}
+
+	defer func() {
+		if increaseSize {
+			size = size + 1
+		}
+	}()
+
 	min := func(x, y int) int {
 		if x > y {
 			return y

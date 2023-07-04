@@ -44,3 +44,6 @@ test/fuzz-reader/corpus/*.tar.gz
 
 # Gitleaks
 gitleaks.tar.gz
+
+# Dependency directories (remove the comment below to include it)
+vendor/

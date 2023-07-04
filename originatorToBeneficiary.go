@@ -86,6 +86,10 @@ func (ob *OriginatorToBeneficiary) Parse(record string) error {
 	ob.LineFour = value
 	length += read
 
+	if len(ob.LineFour) >= 35 {
+		length += (strings.Index(record[length:], "*") + 1)
+	}
+
 	if err := ob.verifyDataWithReadLength(record, length); err != nil {
 		return NewTagMaxLengthErr(err)
 	}
