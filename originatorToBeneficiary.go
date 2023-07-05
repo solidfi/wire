@@ -6,6 +6,7 @@ package wire
 
 import (
 	"encoding/json"
+	"log"
 	"strings"
 	"unicode/utf8"
 )
@@ -89,6 +90,8 @@ func (ob *OriginatorToBeneficiary) Parse(record string) error {
 	if len(ob.LineFour) >= 35 {
 		length += (strings.Index(record[length:], "*") + 1)
 	}
+
+	log.Println("Wire description", ob.LineTwo, ob.LineTwo, ob.LineThree, ob.LineFour)
 
 	if err := ob.verifyDataWithReadLength(record, length); err != nil {
 		return NewTagMaxLengthErr(err)
